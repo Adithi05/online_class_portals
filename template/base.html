@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}Online Classes Portal{% endblock %}</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-pVn3Z9qbb+3q44Vt8pWQEtc+FG1Qw0RmZ77j2TxaxM1sI9zwntQcW1+j2Vb7AN+W1HL8KPg1S+Kd8SlJo2/2Mg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #fefefe;
+      color: #222;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: #0077cc;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover,
+    a:focus {
+      color: #005fa3;
+      outline: none;
+      text-decoration: underline;
+    }
+
+    /* Header & Nav */
+    header {
+      background-color: #004080;
+      color: white;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      user-select: none;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.9rem;
+      letter-spacing: 1.3px;
+    }
+
+    nav a {
+      color: white;
+      
+      margin-left: 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    nav a:hover{
+        color: white;
+    }
+
+    nav a:focus-visible {
+      outline: 2px solid #66b2ff;
+      outline-offset: 2px;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, rgba(0, 64, 128, 0.8), rgba(0, 102, 204, 0.6)),
+                  url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 7rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+
+    .hero h2 {
+      font-size: 3.2rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      line-height: 1.1;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .btn-primary {
+      background-color: #00aaff;
+      border: none;
+      color: white;
+      padding: 0.9rem 2.5rem;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 20px rgba(0,170,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      user-select: none;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background-color: #007acc;
+      box-shadow: 0 8px 28px rgba(0,122,204,0.8);
+      outline: none;
+    }
+
+    /* Main Container */
+    main.container {
+      max-width: 900px;
+      margin: 3rem auto 5rem;
+      padding: 0 1.5rem;
+    }
+
+    /* Flash messages */
+    .flashes {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.8rem;
+    }
+
+    .flash-message {
+      background-color: #d1e7ff;
+      border-left: 6px solid #0077cc;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+      color: #004080;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0, 119, 204, 0.2);
+    }
+
+    /* Features Section */
+    .features {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 14px;
+      padding: 2.2rem 2rem;
+      box-shadow: 0 10px 25px rgb(0 0 0 / 0.1);
+      flex: 1 1 280px;
+      max-width: 320px;
+      text-align: center;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: default;
+      user-select: none;
+    }
+
+    .feature-card:hover,
+    .feature-card:focus-within {
+      transform: translateY(-10px);
+      box-shadow: 0 14px 35px rgb(0 0 0 / 0.15);
+    }
+
+    .feature-card i {
+      font-size: 3.5rem;
+      color: #00aaff;
+      margin-bottom: 1.3rem;
+      transition: color 0.3s ease;
+    }
+
+    .feature-card:hover i,
+    .feature-card:focus-within i {
+      color: #007acc;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #004080;
+      letter-spacing: 0.02em;
+    }
+
+    .feature-card p {
+      font-size: 1.05rem;
+      color: #444;
+      line-height: 1.5;
+      user-select: text;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.8rem 2rem;
+      background-color: #f4f6f8;
+      color: #555;
+      font-size: 0.95rem;
+      border-top: 1px solid #ddd;
+      margin-top: 5rem;
+      user-select: none;
+      letter-spacing: 0.03em;
+    }
+
+    footer .social-icons {
+      margin: 0.75rem 0 1.25rem;
+    }
+
+    footer .social-icons a {
+      color: #0077cc;
+      font-size: 1.3rem;
+      margin: 0 0.6rem;
+      transition: color 0.3s ease;
+      display: inline-block;
+    }
+
+    footer .social-icons a:hover,
+    footer .social-icons a:focus {
+      color: #005fa3;
+      outline: none;
+    }
+
+    /* Video styling for course detail */
+    video {
+      border-radius: 14px;
+      box-shadow: 0 10px 28px rgb(0 0 0 / 0.17);
+      max-width: 100%;
+      display: block;
+      margin: 2.5rem 0;
+      user-select: none;
+    }
+
+    /* Back link */
+    a.back-link {
+      display: inline-block;
+      color: #0077cc;
+      font-weight: 600;
+      margin-top: 1.25rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s ease;
+      user-select: none;
+    }
+
+    a.back-link:hover,
+    a.back-link:focus {
+      border-color: #005fa3;
+      outline: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 1.25rem;
+        margin-bottom: 0.75rem;
+        font-size: 0.95rem;
+      }
+
+      .features {
+        flex-direction: column;
+        gap: 1.8rem;
+      }
+    }
+
+    /* Animation */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Online Classes Portal</h1>
+  <nav>
+    {% if current_user.is_authenticated %}
+    <span>Logged in as {{ current_user.username }}</span> |
+    
+    <a href="{{ url_for('login') }}">Login</a>
+{% endif %}
+
+    <a href="{{ url_for('index') }}">Home</a>
+    {% if current_user.is_authenticated %}
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+      <a href="{{ url_for('login') }}">Login</a>
+      <a href="{{ url_for('register') }}">Register</a>
+    {% endif %}
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero" role="banner" aria-label="Welcome to Online Classes Portal">
+  <div class="hero-content">
+    <h2>Learn, Practice &amp; Grow Your Skills</h2>
+    <p>Access quality tutorials and video courses from expert tutors, anytime and anywhere.</p>
+    <a href="{{ url_for('register') }}" class="btn-primary" role="button">Get Started</a>
+  </div>
+</section>
+
+<main class="container" role="main">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes" aria-live="polite">
+        {% for msg in messages %}
+          <li class="flash-message" tabindex="0">{{ msg }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+
+  <!-- Feature Highlights -->
+  <section class="features" aria-label="Platform Features">
+    <div class="feature-card" tabindex="0">
+      <i class="fa-solid fa-chalkboard-teacher" aria-hidden="true"></i>
+      <h3>Expert Tutors</h3>
+      <p>Learn from industry professionals and experienced educators with real-world expertise.</p>
+    </div>
+    <div class="feature-card" tabindex="0">
+      <i class="fa-solid fa-video" aria-hidden="true"></i>
+      <h3>Interactive Video Courses</h3>
+      <p>High-quality video tutorials with quizzes and assignments to keep you engaged.</p>
+    </div>
+    <div class="feature-card" tabindex="0">
+      <i class="fa-solid fa-certificate" aria-hidden="true"></i>
+      <h3>Certifications</h3>
+      <p>Earn certificates to showcase your achievements and boost your career prospects.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="social-icons" aria-label="Social Media Links">
+    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+  <p>© 2025 Online Classes Portal | Made with ❤️ by You</p>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const flashMessages = document.querySelectorAll('.flash-message');
+    flashMessages.forEach(msg => {
+      setTimeout(() => {
+        msg.style.display = 'none';
+      }, 4500);
+    });
+  });
+</script>
+
+</body>
+</html>
