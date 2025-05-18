@@ -172,6 +172,11 @@ def delete_course(course_id):
     flash("Course deleted successfully!")
     return redirect(url_for('dashboard'))
 
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+
 # ─── RUN ────────────────────────────────────────────────
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
