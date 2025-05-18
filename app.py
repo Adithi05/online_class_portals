@@ -12,6 +12,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/online_
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024  # 200MB
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your_fallback_dev_key')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 
 ALLOWED_EXT = {'mp4', 'mov', 'avi', 'mkv'}
 
@@ -172,6 +174,5 @@ def delete_course(course_id):
 
 # ─── RUN ────────────────────────────────────────────────
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
+
