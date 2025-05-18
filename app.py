@@ -19,6 +19,10 @@ ALLOWED_EXT = {'mp4', 'mov', 'avi', 'mkv'}
 
 # ─── INIT ───────────────────────────────────────────────
 db = SQLAlchemy(app)
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
@@ -175,6 +179,12 @@ def delete_course(course_id):
 @app.before_first_request
 def create_tables():
     db.create_all()
+    if not User.query.filter_by(username='admin').first():
+        new_user = User(username='admin', role='admin')
+        new_user.set_password('admin123')  # if using password hashing
+        db.session.add(new_user)
+        db.session.commit()
+
 
 
 # ─── RUN ────────────────────────────────────────────────
