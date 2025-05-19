@@ -19,9 +19,7 @@ ALLOWED_EXT = {'mp4', 'mov', 'avi', 'mkv'}
 
 # ─── INIT ───────────────────────────────────────────────
 db = SQLAlchemy(app)
-@app.before_first_request
-def create_tables():
-    db.create_all()
+
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
@@ -176,18 +174,20 @@ def delete_course(course_id):
     flash("Course deleted successfully!")
     return redirect(url_for('dashboard'))
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-    if not User.query.filter_by(username='admin').first():
-        new_user = User(username='admin', role='admin')
-        new_user.set_password('admin123')  # if using password hashing
-        db.session.add(new_user)
-        db.session.commit()
-
 
 
 # ─── RUN ────────────────────────────────────────────────
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
 
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()  # Automatically create tables if not already present
+
+        # Optional: Create a default admin user
+        if not User.query.filter_by(username='admin').first():
+            admin = User(username='admin', role='admin')
+            admin.set_password('admin123')  # You can change this password later
+            db.session.add(admin)
+            db.session.commit()
+            print("Admin user created.")
+
+    app.run(debug=False, host='0.0.0.0')
