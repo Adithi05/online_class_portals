@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 # ─── CONFIG ─────────────────────────────────────────────
 app = Flask(__name__, template_folder='template')
 app.secret_key = "replace_this_with_a_random_secret"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/online_classes'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024  # 200MB
