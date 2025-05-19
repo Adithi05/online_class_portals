@@ -170,13 +170,21 @@ def delete_course(course_id):
     flash("Course deleted successfully!")
     return redirect(url_for('dashboard'))
 
-# ─── INITIALIZATION ─────────────────────────────────────
-@app.before_first_request
-def initialize_database():
-    db.create_all()
-    if not User.query.filter_by(username='admin').first():
-        admin = User(username='admin', role='admin')
-        admin.set_password('admin123')
-        db.session.add(admin)
-        db.session.commit()
-        print("Default admin user created.")
+
+  # ─── INITIALIZATION ─────────────────────────────────────
+initialized = False
+
+@app.before_request
+def initialize_once():
+    global initialized
+    if not initialized:
+        with app.app_context():
+            db.create_all()
+            if not User.query.filter_by(username='admin').first():
+                admin = User(username='admin', role='admin')
+                admin.set_password('admin123')
+                db.session.add(admin)
+                db.session.commit()
+                print("Default admin user created.")
+        initialized = True
+
