@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
 # ─── CONFIG ─────────────────────────────────────────────
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder='template')
 app.secret_key = os.environ.get("SECRET_KEY", "random_secret")
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
