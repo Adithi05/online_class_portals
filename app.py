@@ -54,7 +54,9 @@ def allowed_file(filename):
 # ─── ROUTES ─────────────────────────────────────────────
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', user=current_user)
+
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
