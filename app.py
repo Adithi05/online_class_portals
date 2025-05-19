@@ -13,7 +13,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024  # 200MB
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your_fallback_dev_key')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/online_classes_portals'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgresql://online_class_portals_user:mUQsn1KIfZYmx2VZQUi4KwIxcx3OtuuW@dpg-d0lii856ubrc73c4gijg-a/online_class_portals')
+
 
 ALLOWED_EXT = {'mp4', 'mov', 'avi', 'mkv'}
 
