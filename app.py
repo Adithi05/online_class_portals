@@ -6,21 +6,18 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
 # ─── CONFIG ─────────────────────────────────────────────
-app = Flask(__name__, template_folder='template')
-app.secret_key = "replace_this_with_a_random_secret"
+app = Flask(__name__, template_folder='templates')
+app.secret_key = os.environ.get("SECRET_KEY", "random_secret")
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024  # 200MB
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your_fallback_dev_key')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
 ALLOWED_EXT = {'mp4', 'mov', 'avi', 'mkv'}
 
 # ─── INIT ───────────────────────────────────────────────
 db = SQLAlchemy(app)
-
-
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
@@ -152,7 +149,6 @@ def course_detail(course_id):
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-
 @app.route('/delete_course/<int:course_id>', methods=['POST'])
 @login_required
 def delete_course(course_id):
@@ -174,20 +170,13 @@ def delete_course(course_id):
     flash("Course deleted successfully!")
     return redirect(url_for('dashboard'))
 
-
-
-# ─── RUN ────────────────────────────────────────────────
-
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()  # Automatically create tables if not already present
-
-        # Optional: Create a default admin user
-        if not User.query.filter_by(username='admin').first():
-            admin = User(username='admin', role='admin')
-            admin.set_password('admin123')  # You can change this password later
-            db.session.add(admin)
-            db.session.commit()
-            print("Admin user created.")
-
-    app.run(debug=False, host='0.0.0.0')
+# ─── INITIALIZATION ─────────────────────────────────────
+@app.before_first_request
+def initialize_database():
+    db.create_all()
+    if not User.query.filter_by(username='admin').first():
+        admin = User(username='admin', role='admin')
+        admin.set_password('admin123')
+        db.session.add(admin)
+        db.session.commit()
+        print("Default admin user created.")
