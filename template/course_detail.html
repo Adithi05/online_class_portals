@@ -6,7 +6,8 @@
 
 <h2>{{ course.title }}</h2>
 <p>{{ course.description }}</p>
-<video width="640" controls>
-  <source src="{{ url_for('uploaded_file', filename=course.video_filename) }}" type="video/mp4">
+<video width="320" height="240" controls>
+ <source src="{{ url_for('static', filename='uploads/' + course.video_filename) }}" type="video/mp4">
+
   Your browser does not support the video tag.
 </video>
