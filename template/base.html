@@ -5,8 +5,7 @@
   <title>{% block title %}Online Classes Portal{% endblock %}</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="{{ url_for('static', 'favicon.png;) }}">
-
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -15,9 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pVn3Z9qbb+3q44Vt8pWQEtc+FG1Qw0RmZ77j2TxaxM1sI9zwntQcW1+j2Vb7AN+W1HL8KPg1S+Kd8SlJo2/2Mg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -25,8 +22,6 @@
       background: #fefefe;
       color: #222;
       line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     a {
@@ -54,8 +49,6 @@
       justify-content: space-between;
       align-items: center;
       font-weight: 700;
-      letter-spacing: 0.03em;
-      user-select: none;
       flex-wrap: wrap;
     }
 
@@ -118,9 +111,7 @@
       font-size: 3.2rem;
       margin-bottom: 1rem;
       font-weight: 800;
-      letter-spacing: 1.5px;
       text-shadow: 0 4px 10px rgba(0,0,0,0.4);
-      line-height: 1.1;
     }
 
     .hero p {
@@ -143,17 +134,14 @@
       box-shadow: 0 6px 20px rgba(0,170,255,0.5);
       text-transform: uppercase;
       letter-spacing: 1.1px;
-      user-select: none;
       display: inline-block;
       min-width: 160px;
-      text-align: center;
     }
 
     .btn-primary:hover,
     .btn-primary:focus {
       background-color: #007acc;
       box-shadow: 0 8px 28px rgba(0,122,204,0.8);
-      outline: none;
     }
 
     main.container {
@@ -196,11 +184,9 @@
       max-width: 320px;
       text-align: center;
       transition: transform 0.35s ease, box-shadow 0.35s ease;
-      cursor: default;
     }
 
-    .feature-card:hover,
-    .feature-card:focus-within {
+    .feature-card:hover {
       transform: translateY(-10px);
       box-shadow: 0 14px 35px rgb(0 0 0 / 0.15);
     }
@@ -209,12 +195,6 @@
       font-size: 3.5rem;
       color: #00aaff;
       margin-bottom: 1.3rem;
-      transition: color 0.3s ease;
-    }
-
-    .feature-card:hover i,
-    .feature-card:focus-within i {
-      color: #007acc;
     }
 
     .feature-card h3 {
@@ -222,76 +202,71 @@
       font-size: 1.35rem;
       font-weight: 800;
       color: #004080;
-      letter-spacing: 0.02em;
     }
 
     .feature-card p {
       font-size: 1.05rem;
       color: #444;
-      line-height: 1.5;
     }
 
     .auth-container {
-  max-width: 420px;
-  margin: 4rem auto 5rem;
-  padding: 2.5rem;
-  background: #ffffff;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  text-align: center;
-  animation: fadeInUp 0.8s ease forwards;
-  opacity: 0;
-}
+      max-width: 420px;
+      margin: 4rem auto 5rem;
+      padding: 2.5rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      text-align: center;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+    }
 
-.auth-container h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #004080;
-}
+    .auth-container h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #004080;
+    }
 
-.auth-container label {
-  display: block;
-  margin: 1rem 0 0.6rem;
-  text-align: left;
-  font-weight: 600;
-  color: #333;
-}
+    .auth-container label {
+      display: block;
+      margin: 1rem 0 0.6rem;
+      text-align: left;
+      font-weight: 600;
+      color: #333;
+    }
 
-.auth-container input,
-.auth-container select {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  transition: border-color 0.3s ease;
-}
+    .auth-container input,
+    .auth-container select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
 
-.auth-container input:focus,
-.auth-container select:focus {
-  border-color: #0077cc;
-  outline: none;
-}
+    .auth-container input:focus,
+    .auth-container select:focus {
+      border-color: #0077cc;
+      outline: none;
+    }
 
-.auth-container button {
-  background-color: #0077cc;
-  color: white;
-  border: none;
-  padding: 0.9rem 2rem;
-  font-size: 1.1rem;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  font-weight: bold;
-  width: 100%;
-}
+    .auth-container button {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      padding: 0.9rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+    }
 
-.auth-container button:hover {
-  background-color: #005fa3;
-  box-shadow: 0 4px 12px rgba(0, 119, 204, 0.3);
-}
-
+    .auth-container button:hover {
+      background-color: #005fa3;
+      box-shadow: 0 4px 12px rgba(0, 119, 204, 0.3);
+    }
 
     footer {
       text-align: center;
@@ -301,7 +276,6 @@
       font-size: 0.95rem;
       border-top: 1px solid #ddd;
       margin-top: 5rem;
-      user-select: none;
     }
 
     footer .social-icons {
@@ -312,37 +286,17 @@
       color: #0077cc;
       font-size: 1.3rem;
       margin: 0 0.6rem;
-      transition: color 0.3s ease;
-      display: inline-block;
     }
 
-    footer .social-icons a:hover,
-    footer .social-icons a:focus {
+    footer .social-icons a:hover {
       color: #005fa3;
-      outline: none;
     }
 
     video {
       border-radius: 14px;
       box-shadow: 0 10px 28px rgb(0 0 0 / 0.17);
       max-width: 100%;
-      display: block;
       margin: 2.5rem 0;
-    }
-
-    a.back-link {
-      display: inline-block;
-      color: #0077cc;
-      font-weight: 600;
-      margin-top: 1.25rem;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.3s ease;
-    }
-
-    a.back-link:hover,
-    a.back-link:focus {
-      border-color: #005fa3;
-      outline: none;
     }
 
     @media (max-width: 640px) {
@@ -360,14 +314,8 @@
     }
 
     @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -439,7 +387,6 @@
 </footer>
 
 <script>
-  // Hide flash messages after 4.5 seconds
   document.addEventListener('DOMContentLoaded', function () {
     const flashMessages = document.querySelectorAll('.flash-message');
     flashMessages.forEach(msg => {
@@ -448,11 +395,12 @@
       }, 4500);
     });
 
-    // Highlight active nav link
-    const navLinks = document.querySelectorAll("nav a");
-    navLinks.forEach(link => {
+    // Highlight current page
+    const links = document.querySelectorAll('nav a');
+    links.forEach(link => {
       if (link.href === window.location.href) {
-        link.classList.add("active");
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
       }
     });
   });
