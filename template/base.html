@@ -4,20 +4,16 @@
   <meta charset="UTF-8" />
   <title>{% block title %}Online Classes Portal{% endblock %}</title>
 
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/190/190411.png" type="image/png" />
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- FontAwesome for icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-pVn3Z9qbb+3q44Vt8pWQEtc+FG1Qw0RmZ77j2TxaxM1sI9zwntQcW1+j2Vb7AN+W1HL8KPg1S+Kd8SlJo2/2Mg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pVn3Z9qbb+3q44Vt8pWQEtc+FG1Qw0RmZ77j2TxaxM1sI9zwntQcW1+j2Vb7AN+W1HL8KPg1S+Kd8SlJo2/2Mg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
-    /* Reset & base */
     * {
       box-sizing: border-box;
     }
@@ -45,7 +41,6 @@
       text-decoration: underline;
     }
 
-    /* Header & Nav */
     header {
       background-color: #004080;
       color: white;
@@ -60,6 +55,7 @@
       font-weight: 700;
       letter-spacing: 0.03em;
       user-select: none;
+      flex-wrap: wrap;
     }
 
     header h1 {
@@ -68,23 +64,25 @@
       letter-spacing: 1.3px;
     }
 
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
     nav a {
       color: white;
-      
-      margin-left: 2rem;
       font-weight: 600;
       font-size: 1rem;
-    }
-    nav a:hover{
-        color: white;
-    }
-
-    nav a:focus-visible {
-      outline: 2px solid #66b2ff;
-      outline-offset: 2px;
+      padding: 0.25rem 0.5rem;
+      border-bottom: 2px solid transparent;
     }
 
-    /* Hero Section */
+    nav a:hover,
+    nav a.active {
+      border-color: #fff;
+    }
+
     .hero {
       background: linear-gradient(135deg, rgba(0, 64, 128, 0.8), rgba(0, 102, 204, 0.6)),
                   url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
@@ -92,11 +90,18 @@
       text-align: center;
       padding: 7rem 2rem 6rem;
       position: relative;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 400px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+      z-index: 1;
     }
 
     .hero-content {
@@ -105,6 +110,7 @@
       margin: 0 auto;
       animation: fadeInUp 1s ease forwards;
       opacity: 0;
+      z-index: 2;
     }
 
     .hero h2 {
@@ -138,7 +144,8 @@
       letter-spacing: 1.1px;
       user-select: none;
       display: inline-block;
-      text-decoration: none;
+      min-width: 160px;
+      text-align: center;
     }
 
     .btn-primary:hover,
@@ -148,14 +155,12 @@
       outline: none;
     }
 
-    /* Main Container */
     main.container {
       max-width: 900px;
       margin: 3rem auto 5rem;
       padding: 0 1.5rem;
     }
 
-    /* Flash messages */
     .flashes {
       list-style: none;
       padding: 0;
@@ -173,7 +178,6 @@
       box-shadow: 0 2px 8px rgba(0, 119, 204, 0.2);
     }
 
-    /* Features Section */
     .features {
       display: flex;
       gap: 2rem;
@@ -192,7 +196,6 @@
       text-align: center;
       transition: transform 0.35s ease, box-shadow 0.35s ease;
       cursor: default;
-      user-select: none;
     }
 
     .feature-card:hover,
@@ -225,10 +228,8 @@
       font-size: 1.05rem;
       color: #444;
       line-height: 1.5;
-      user-select: text;
     }
 
-    /* Footer */
     footer {
       text-align: center;
       padding: 1.8rem 2rem;
@@ -238,7 +239,6 @@
       border-top: 1px solid #ddd;
       margin-top: 5rem;
       user-select: none;
-      letter-spacing: 0.03em;
     }
 
     footer .social-icons {
@@ -259,17 +259,14 @@
       outline: none;
     }
 
-    /* Video styling for course detail */
     video {
       border-radius: 14px;
       box-shadow: 0 10px 28px rgb(0 0 0 / 0.17);
       max-width: 100%;
       display: block;
       margin: 2.5rem 0;
-      user-select: none;
     }
 
-    /* Back link */
     a.back-link {
       display: inline-block;
       color: #0077cc;
@@ -277,7 +274,6 @@
       margin-top: 1.25rem;
       border-bottom: 2px solid transparent;
       transition: border-color 0.3s ease;
-      user-select: none;
     }
 
     a.back-link:hover,
@@ -286,27 +282,20 @@
       outline: none;
     }
 
-    /* Responsive */
     @media (max-width: 640px) {
       header {
         flex-direction: column;
         align-items: flex-start;
       }
 
-      nav a {
-        margin-left: 0;
-        margin-right: 1.25rem;
-        margin-bottom: 0.75rem;
-        font-size: 0.95rem;
-      }
-
-      .features {
-        flex-direction: column;
-        gap: 1.8rem;
+      nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 0.5rem;
       }
     }
 
-    /* Animation */
     @keyframes fadeInUp {
       0% {
         opacity: 0;
@@ -325,23 +314,18 @@
   <h1>Online Classes Portal</h1>
   <nav>
     {% if current_user.is_authenticated %}
-    <span>Logged in as {{ current_user.username }}</span> |
-    
-    <a href="{{ url_for('login') }}">Login</a>
-{% endif %}
-
-    <a href="{{ url_for('index') }}">Home</a>
-    {% if current_user.is_authenticated %}
+      <span>Welcome, {{ current_user.username }}</span>
+      <a href="{{ url_for('index') }}">Home</a>
       <a href="{{ url_for('dashboard') }}">Dashboard</a>
       <a href="{{ url_for('logout') }}">Logout</a>
     {% else %}
+      <a href="{{ url_for('index') }}">Home</a>
       <a href="{{ url_for('login') }}">Login</a>
       <a href="{{ url_for('register') }}">Register</a>
     {% endif %}
   </nav>
 </header>
 
-<!-- Hero Section -->
 <section class="hero" role="banner" aria-label="Welcome to Online Classes Portal">
   <div class="hero-content">
     <h2>Learn, Practice &amp; Grow Your Skills</h2>
@@ -363,7 +347,6 @@
 
   {% block content %}{% endblock %}
 
-  <!-- Feature Highlights -->
   <section class="features" aria-label="Platform Features">
     <div class="feature-card" tabindex="0">
       <i class="fa-solid fa-chalkboard-teacher" aria-hidden="true"></i>
@@ -389,16 +372,25 @@
     <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
     <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
   </div>
-  <p>© 2025 Online Classes Portal | Made with ❤️ by You</p>
+  <p>© 2025 Online Classes Portal | Made with ❤️ by Adithi</p>
 </footer>
 
 <script>
+  // Hide flash messages after 4.5 seconds
   document.addEventListener('DOMContentLoaded', function () {
     const flashMessages = document.querySelectorAll('.flash-message');
     flashMessages.forEach(msg => {
       setTimeout(() => {
         msg.style.display = 'none';
       }, 4500);
+    });
+
+    // Highlight active nav link
+    const navLinks = document.querySelectorAll("nav a");
+    navLinks.forEach(link => {
+      if (link.href === window.location.href) {
+        link.classList.add("active");
+      }
     });
   });
 </script>
