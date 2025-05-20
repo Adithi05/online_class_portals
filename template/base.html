@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- FontAwesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pVn3Z9qbb+3q44Vt8pWQEtc+FG1Qw0RmZ77j2TxaxM1sI9zwntQcW1+j2Vb7AN+W1HL8KPg1S+Kd8SlJo2/2Mg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
     * { box-sizing: border-box; }
@@ -345,66 +345,23 @@
   </div>
 </section>
 
-<main class="container" role="main">
+<main class="container">
   {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul class="flashes" aria-live="polite">
-        {% for msg in messages %}
-          <li class="flash-message" tabindex="0">{{ msg }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
+  {% if messages %}
+    <ul class="flashes" aria-live="polite">
+      {% for msg in messages %}
+      <li class="flash-message" role="alert" tabindex="0">{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
   {% endwith %}
 
   {% block content %}{% endblock %}
-
-  <section class="features" aria-label="Platform Features">
-    <div class="feature-card" tabindex="0">
-      <i class="fa-solid fa-chalkboard-teacher" aria-hidden="true"></i>
-      <h3>Expert Tutors</h3>
-      <p>Learn from industry professionals and experienced educators with real-world expertise.</p>
-    </div>
-    <div class="feature-card" tabindex="0">
-      <i class="fa-solid fa-video" aria-hidden="true"></i>
-      <h3>Interactive Video Courses</h3>
-      <p>High-quality video tutorials with quizzes and assignments to keep you engaged.</p>
-    </div>
-    <div class="feature-card" tabindex="0">
-      <i class="fa-solid fa-certificate" aria-hidden="true"></i>
-      <h3>Certifications</h3>
-      <p>Earn certificates to showcase your achievements and boost your career prospects.</p>
-    </div>
-  </section>
 </main>
 
 <footer>
-  <div class="social-icons" aria-label="Social Media Links">
-    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-  </div>
-  <p>© 2025 Online Classes Portal | Made by Adithi</p>
+  &copy; 2025 Online Classes Portal - Created by You
 </footer>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const flashMessages = document.querySelectorAll('.flash-message');
-    flashMessages.forEach(msg => {
-      setTimeout(() => {
-        msg.style.display = 'none';
-      }, 4500);
-    });
-
-    // Highlight current page
-    const links = document.querySelectorAll('nav a');
-    links.forEach(link => {
-      if (link.href === window.location.href) {
-        link.classList.add('active');
-        link.setAttribute('aria-current', 'page');
-      }
-    });
-  });
-</script>
 
 </body>
 </html>

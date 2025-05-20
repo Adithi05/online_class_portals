@@ -1,18 +1,14 @@
 {% extends "base.html" %}
-
 {% block title %}{{ course.title }} - Online Classes Portal{% endblock %}
 
 {% block content %}
-  <h2>{{ course.title }}</h2>
-  <p>{{ course.description }}</p>
-  
-  <video width="320" height="240" controls>
-        <source src="{{ url_for('static', filename='uploads/' ~ video) }}" 
-                type="video/{{ video.split('.')[-1] }}">
-        Your browser does not support the video tag.
-    </video>
+<h1>{{ course.title }}</h1>
+<p>{{ course.description }}</p>
 
+<video width="640" height="360" controls>
+    <source src="{{ url_for('uploaded_file', filename=course.video_filename) }}" type="video/mp4" />
+    Your browser does not support the video tag.
+</video>
 
-  <br><br>
-  <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+<p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
 {% endblock %}
