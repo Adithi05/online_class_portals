@@ -6,11 +6,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
 # ─── CONFIG ─────────────────────────────────────────────
-app = Flask(__name__, template_folder='template')
+app = Flask(__name__, template_folder='templates')  # usually plural 'templates'
 app.secret_key = os.environ.get("SECRET_KEY", "random_secret")
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
+
+# Use absolute path for UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024  # 200MB
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
@@ -55,8 +57,6 @@ def allowed_file(filename):
 @app.route('/')
 def index():
     return render_template('index.html', user=current_user)
-
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -149,17 +149,8 @@ def course_detail(course_id):
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
+    # Serve uploaded video file
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
-app = Flask(__name__)
-
-@app.route('/play')
-def play_video():
-    return render_template('play_video.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
 
 @app.route('/delete_course/<int:course_id>', methods=['POST'])
 @login_required
@@ -182,8 +173,7 @@ def delete_course(course_id):
     flash("Course deleted successfully!")
     return redirect(url_for('dashboard'))
 
-
-  # ─── INITIALIZATION ─────────────────────────────────────
+# ─── INITIALIZATION ─────────────────────────────────────
 initialized = False
 
 @app.before_request
@@ -199,3 +189,6 @@ def initialize_once():
                 db.session.commit()
                 print("Default admin user created.")
         initialized = True
+
+if __name__ == '__main__':
+    app.run(debug=True)
