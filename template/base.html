@@ -5,7 +5,7 @@
   <title>{% block title %}Online Classes Portal{% endblock %}</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', 'favicon.png;) }}">
 
 
   <!-- Google Fonts -->
@@ -230,6 +230,68 @@
       color: #444;
       line-height: 1.5;
     }
+
+    .auth-container {
+  max-width: 420px;
+  margin: 4rem auto 5rem;
+  padding: 2.5rem;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  text-align: center;
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+.auth-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #004080;
+}
+
+.auth-container label {
+  display: block;
+  margin: 1rem 0 0.6rem;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+}
+
+.auth-container input,
+.auth-container select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.auth-container input:focus,
+.auth-container select:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+.auth-container button {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-weight: bold;
+  width: 100%;
+}
+
+.auth-container button:hover {
+  background-color: #005fa3;
+  box-shadow: 0 4px 12px rgba(0, 119, 204, 0.3);
+}
+
 
     footer {
       text-align: center;
