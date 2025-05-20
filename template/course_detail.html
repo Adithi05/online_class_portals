@@ -5,11 +5,12 @@
 {% block content %}
   <h2>{{ course.title }}</h2>
   <p>{{ course.description }}</p>
-
-<video width="640" height="360" controls>
-  <source src="{{ url_for('static', filename='videos' )}}" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+  
+  <video width="320" height="240" controls>
+        <source src="{{ url_for('static', filename='uploads/' ~ video) }}" 
+                type="video/{{ video.split('.')[-1] }}">
+        Your browser does not support the video tag.
+    </video>
 
 
   <br><br>
