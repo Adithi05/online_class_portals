@@ -1,13 +1,17 @@
-{% if current_user.role == 'student' and not enrolled %}
-<form method="POST" action="{{ url_for('enroll', course_id=course.id) }}">
-    <button type="submit">Enroll in this course</button>
-</form>
-{% endif %}
+{% extends "base.html" %}
 
-<h2>{{ course.title }}</h2>
-<p>{{ course.description }}</p>
-<video width="320" height="240" controls>
- <source src="{{ url_for('static', filename='uploads/' + course.video_filename) }}" type="video/mp4">
+{% block title %}{{ course.title }} - Online Classes Portal{% endblock %}
 
+{% block content %}
+  <h2>{{ course.title }}</h2>
+  <p>{{ course.description }}</p>
+
+<video width="640" height="360" controls>
+  <source src="{{ url_for('static', filename='videos' )}}" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+
+  <br><br>
+  <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+{% endblock %}
