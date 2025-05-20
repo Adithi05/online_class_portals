@@ -208,6 +208,61 @@
       box-shadow: 0 8px 28px rgba(0,122,204,0.8);
       outline: none;
     }
+    /* LOGIN & REGISTER PAGES */
+.auth-form-container {
+  max-width: 420px;
+  margin: 3rem auto 5rem;
+  background: white;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.auth-form-container h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #004080;
+}
+
+.auth-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.auth-form-container input[type="text"],
+.auth-form-container input[type="email"],
+.auth-form-container input[type="password"] {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.auth-form-container input:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+.auth-form-container button {
+  background-color: #00aaff;
+  border: none;
+  color: white;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.auth-form-container button:hover {
+  background-color: #007acc;
+}
+
 
     main.container {
       max-width: 900px;
