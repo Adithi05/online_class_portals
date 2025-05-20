@@ -7,12 +7,12 @@ from werkzeug.utils import secure_filename
 
 # ─── CONFIG ─────────────────────────────────────────────
 app = Flask(__name__, template_folder='template')
-app.secret_key = "replace_this_with_a_random_secret"
-app.config['SQLALCHEMY_DATABASE_URI'] =  os.environ.get('DATABASE_URL')
+app.secret_key = os.environ.get("SECRET_KEY", "random_secret")
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024  # 200MB
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
 ALLOWED_EXT = {'mp4', 'mov', 'avi', 'mkv'}
 
@@ -54,7 +54,9 @@ def allowed_file(filename):
 # ─── ROUTES ─────────────────────────────────────────────
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', user=current_user)
+
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -142,15 +144,7 @@ def upload_course():
 @app.route('/course/<int:course_id>')
 @login_required
 def course_detail(course_id):
-    course = Course.query.get(course_id)
-    if not course:
-        flash("Course not found!")
-        return redirect(url_for('dashboard'))
-
-    if not course.video_filename:
-        flash("Video file missing for this course.")
-        return redirect(url_for('dashboard'))
-
+    course = Course.query.get_or_404(course_id)
     return render_template('course_detail.html', course=course)
 
 @app.route('/uploads/<filename>')
@@ -178,8 +172,20 @@ def delete_course(course_id):
     flash("Course deleted successfully!")
     return redirect(url_for('dashboard'))
 
-# ─── RUN ────────────────────────────────────────────────
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)
+
+  # ─── INITIALIZATION ─────────────────────────────────────
+initialized = False
+
+@app.before_request
+def initialize_once():
+    global initialized
+    if not initialized:
+        with app.app_context():
+            db.create_all()
+            if not User.query.filter_by(username='admin').first():
+                admin = User(username='admin', role='admin')
+                admin.set_password('admin123')
+                db.session.add(admin)
+                db.session.commit()
+                print("Default admin user created.")
+        initialized = True

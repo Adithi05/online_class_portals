@@ -1,29 +1,35 @@
+<h2>Welcome, {{ current_user.username }}!</h2>
+<p>You are logged in as a {{ current_user.role }}.</p>
+
 {% extends "base.html" %}
-{% block title %}Dashboard - Online Classes Portal{% endblock %}
+
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<h2>Dashboard</h2>
+<h2>Welcome, {{ current_user.username }}!</h2>
+<p>You are logged in as a {{ current_user.role }}.</p>
 
 {% if current_user.role == 'tutor' %}
-  <p><a href="{{ url_for('upload_course') }}" class="btn-primary">Upload New Course</a></p>
+    <p><a href="{{ url_for('upload_course') }}">Upload a new course</a></p>
+    <h3>Your Uploaded Courses:</h3>
+{% else %}
+    <h3>Available Courses:</h3>
 {% endif %}
 
-{% if courses %}
-  <ul class="course-list" aria-label="List of courses">
+<ul>
     {% for course in courses %}
-      <li>
-        <h3><a href="{{ url_for('course_detail', course_id=course.id) }}">{{ course.title }}</a></h3>
-        <p>{{ course.description|truncate(100) }}</p>
-
+    <li>
+        <a href="{{ url_for('course_detail', course_id=course.id) }}">{{ course.title }}</a> 
+        by {{ course.uploader.username }}
+        
         {% if current_user.role == 'tutor' and course.uploader_id == current_user.id %}
-        <form action="{{ url_for('delete_course', course_id=course.id) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this course?');" style="display:inline;">
-          <button type="submit" class="btn-danger" aria-label="Delete {{ course.title }}">Delete</button>
+        <form action="{{ url_for('delete_course', course_id=course.id) }}" method="post" style="display:inline;">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete this course?')">Delete</button>
         </form>
         {% endif %}
-      </li>
+    </li>
+    {% else %}
+    <li>No courses found.</li>
     {% endfor %}
-  </ul>
-{% else %}
-  <p>No courses available.</p>
-{% endif %}
+</ul>
 {% endblock %}

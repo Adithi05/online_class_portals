@@ -1,24 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Register - Online Classes Portal{% endblock %}
+
+{% block title %}Register{% endblock %}
 
 {% block content %}
 <h2>Register</h2>
-<form method="post" action="{{ url_for('register') }}" aria-label="Registration Form">
-  <label for="username">Username:</label>
-  <input type="text" id="username" name="username" required autofocus autocomplete="username" />
-
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password" required autocomplete="new-password" />
-
-  <label for="role">Register as:</label>
-  <select id="role" name="role" required>
-    <option value="">Select Role</option>
-    <option value="student">Student</option>
-    <option value="tutor">Tutor</option>
-  </select>
-
-  <button type="submit" class="btn-primary">Register</button>
+<form method="post">
+    <label>Username: <input type="text" name="username" required></label><br>
+    <label>Password: <input type="password" name="password" required></label><br>
+    <label>Role:
+        <select name="role" required>
+            <option value="student">Student</option>
+            <option value="tutor">Tutor</option>
+        </select>
+    </label><br>
+    <button type="submit">Register</button>
 </form>
-
-<p>Already have an account? <a href="{{ url_for('login') }}">Login here</a>.</p>
 {% endblock %}
