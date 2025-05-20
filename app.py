@@ -151,6 +151,16 @@ def course_detail(course_id):
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+app = Flask(__name__)
+
+@app.route('/play')
+def play_video():
+    return render_template('play_video.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
 @app.route('/delete_course/<int:course_id>', methods=['POST'])
 @login_required
 def delete_course(course_id):
