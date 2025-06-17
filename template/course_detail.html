@@ -3,14 +3,17 @@
 {% block title %}{{ course.title }} - Online Classes Portal{% endblock %}
 
 {% block content %}
+<div class="course-detail">
   <h2>{{ course.title }}</h2>
-  <p>{{ course.description }}</p>
+  <p class="course-description">{{ course.description }}</p>
 
-  <video width="640" controls>
+  <video class="video-player" controls>
     <source src="{{ url_for('uploaded_file', filename=course.video_filename) }}" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 
-  <br><br>
-  <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+  <div class="back-link">
+    <a href="{{ url_for('dashboard') }}">&larr; Back to Dashboard</a>
+  </div>
+</div>
 {% endblock %}
