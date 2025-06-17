@@ -3,16 +3,32 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<h2>Register</h2>
-<form method="post">
-    <label>Username: <input type="text" name="username" required></label><br>
-    <label>Password: <input type="password" name="password" required></label><br>
-    <label>Role:
-        <select name="role" required>
-            <option value="student">Student</option>
-            <option value="tutor">Tutor</option>
-        </select>
-    </label><br>
+<div class="auth-container">
+  <form class="auth-form" method="post">
+    <h2>Create an Account</h2>
+    <p>Sign up to start your learning journey</p>
+
+    <label>
+      <input type="text" name="username" placeholder="Username" required>
+    </label>
+
+    <label>
+      <input type="email" name="email" placeholder="Email" required>
+    </label>
+
+    <label>
+      <input type="password" name="password" placeholder="Password" required>
+    </label>
+
+    <label>
+      <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+    </label>
+
     <button type="submit">Register</button>
-</form>
+
+    <p class="switch-link">
+      Already have an account? <a href="{{ url_for('login') }}">Login here</a>
+    </p>
+  </form>
+</div>
 {% endblock %}
