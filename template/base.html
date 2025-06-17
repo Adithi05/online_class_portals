@@ -10,99 +10,41 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pVn3Z9qbb+3q44Vt8pWQEtc+FG1Qw0RmZ77j2TxaxM1sI9zwntQcW1+j2Vb7AN+W1HL8KPg1S+Kd8SlJo2/2Mg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Font Awesome Icons (Always use full CDN link with crossorigin) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-RxpgOPZTY3lsZlbdf8X/cX4v2GKt3Hi4TDAFJ6AY2O/BxRCh2cNwDg6pU7tDdIYwaOpJv+4hCCXvQm1qOoTzKg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
       font-family: 'Roboto', sans-serif;
       background: #fefefe;
-      color: #222;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
-    form {
-      
-      max-width: 400px;
-      margin: 2rem auto;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    #content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
-    form h2 {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    form label {
-      display: block;
-      margin: 1rem 0 0.5rem;
-      font-weight: 600;
-    }
-
-    form input[type="text"],
-    form input[type="password"],
-    form select {
-      width: 100%;
-      padding: 0.6rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
-    }
-
-    form button {
-      width: 100%;
-      padding: 0.7rem;
-      background-color: #0077cc;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-     
-      transition: background-color 0.3s ease;
-    }
-
-    form button:hover {
-      background-color: #005fa3;
-    }
-
-    a {
-      color: #0077cc;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    a:hover,
-    a:focus {
-     
-      outline: none;
-     
+    main.container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
     }
 
     header {
       background-color: #004080;
       color: white;
       padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      user-select: none;
       flex-wrap: wrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     header h1 {
@@ -118,21 +60,16 @@
       align-items: center;
     }
 
-    nav span {
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
     nav a {
       color: white;
       font-weight: 600;
       font-size: 1rem;
       padding: 0.25rem 0.5rem;
       border-bottom: 2px solid transparent;
+      text-decoration: none;
     }
 
-    nav a:hover,
-    nav a.active {
+    nav a:hover, nav a.active {
       border-color: #fff;
     }
 
@@ -160,10 +97,9 @@
     .hero-content {
       position: relative;
       max-width: 700px;
-      margin: 0 auto;
+      z-index: 2;
       animation: fadeInUp 1s ease forwards;
       opacity: 0;
-      z-index: 2;
     }
 
     .hero h2 {
@@ -171,119 +107,30 @@
       margin-bottom: 1rem;
       font-weight: 800;
       letter-spacing: 1.5px;
-      text-shadow: 0 4px 10px rgba(0,0,0,0.4);
-      line-height: 1.1;
     }
 
     .hero p {
       font-size: 1.3rem;
       margin-bottom: 2.5rem;
-      font-weight: 400;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
     .btn-primary {
       background-color: #00aaff;
-      border: none;
-      color: white;
       padding: 0.9rem 2.5rem;
       font-size: 1.2rem;
       border-radius: 30px;
-      cursor: pointer;
+      color: white;
       font-weight: 700;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 6px 20px rgba(0,170,255,0.5);
       text-transform: uppercase;
-      letter-spacing: 1.1px;
-      user-select: none;
+      text-decoration: none;
       display: inline-block;
-      min-width: 160px;
-      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,170,255,0.5);
+      transition: 0.3s ease;
     }
 
-    .btn-primary:hover,
-    .btn-primary:focus {
+    .btn-primary:hover {
       background-color: #007acc;
       box-shadow: 0 8px 28px rgba(0,122,204,0.8);
-      outline: none;
-    }
-    /* LOGIN & REGISTER PAGES */
-.auth-form-container {
-  max-width: 420px;
-  margin: 3rem auto 5rem;
-  background: white;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  text-align: center;
-}
-
-.auth-form-container h2 {
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #004080;
-}
-
-.auth-form-container form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.auth-form-container input[type="text"],
-.auth-form-container input[type="email"],
-.auth-form-container input[type="password"] {
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-.auth-form-container input:focus {
-  border-color: #0077cc;
-  outline: none;
-}
-
-.auth-form-container button {
-  background-color: #00aaff;
-  border: none;
-  color: white;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-}
-
-.auth-form-container button:hover {
-  background-color: #007acc;
-}
-
-
-    main.container {
-      max-width: 900px;
-      margin: 3rem auto 5rem;
-      padding: 0 1.5rem;
-    }
-
-    .flashes {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 1.8rem;
-    }
-
-    .flash-message {
-      background-color: #d1e7ff;
-      border-left: 6px solid #0077cc;
-      padding: 1rem 1.5rem;
-      margin-bottom: 1rem;
-      border-radius: 4px;
-      color: #004080;
-      font-weight: 600;
-      box-shadow: 0 2px 8px rgba(0, 119, 204, 0.2);
     }
 
     .features {
@@ -296,46 +143,24 @@
 
     .feature-card {
       background: white;
-      border-radius: 14px;
       padding: 2.2rem 2rem;
+      border-radius: 14px;
       box-shadow: 0 10px 25px rgb(0 0 0 / 0.1);
+      text-align: center;
       flex: 1 1 280px;
       max-width: 320px;
-      text-align: center;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      cursor: default;
-    }
-
-    .feature-card:hover,
-    .feature-card:focus-within {
-      transform: translateY(-10px);
-      box-shadow: 0 14px 35px rgb(0 0 0 / 0.15);
     }
 
     .feature-card i {
       font-size: 3.5rem;
       color: #00aaff;
       margin-bottom: 1.3rem;
-      transition: color 0.3s ease;
-    }
-
-    .feature-card:hover i,
-    .feature-card:focus-within i {
-      color: #007acc;
     }
 
     .feature-card h3 {
-      margin-bottom: 1rem;
       font-size: 1.35rem;
-      font-weight: 800;
+      margin-bottom: 1rem;
       color: #004080;
-      letter-spacing: 0.02em;
-    }
-
-    .feature-card p {
-      font-size: 1.05rem;
-      color: #444;
-      line-height: 1.5;
     }
 
     footer {
@@ -345,13 +170,10 @@
       color: #555;
       font-size: 0.95rem;
       border-top: 1px solid #ddd;
-      margin-top: 5rem;
-      user-select: none;
     }
 
     footer .social-icons {
       margin: 0.75rem 0 1.25rem;
-      display: block;
     }
 
     footer .social-icons a {
@@ -359,127 +181,121 @@
       font-size: 1.3rem;
       margin: 0 0.6rem;
       transition: color 0.3s ease;
-      display: inline-block;
     }
 
-    footer .social-icons a:hover,
-    footer .social-icons a:focus {
+    footer .social-icons a:hover {
       color: #005fa3;
-      outline: none;
-    }
-
-    video {
-      border-radius: 14px;
-      box-shadow: 0 10px 28px rgb(0 0 0 / 0.17);
-      max-width: 100%;
-      display: block;
-      margin: 2.5rem 0;
     }
 
     @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
       header {
         flex-direction: column;
         align-items: flex-start;
+        padding: 1rem;
       }
 
       nav {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.8rem;
-        margin-top: 0.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin-top: 0.8rem;
+      }
+
+      .hero {
+        padding: 4rem 1rem;
+        min-height: 320px;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .features {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 1rem;
+      }
+
+      .feature-card {
+        max-width: 100%;
+        padding: 1.5rem;
+      }
+
+      footer {
+        padding: 1.5rem 1rem;
       }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Online Classes Portal</h1>
-  <nav>
-    {% if current_user.is_authenticated %}
-      <span>Welcome, {{ current_user.username }}</span>
-      <a href="{{ url_for('index') }}">Home</a>
-      <a href="{{ url_for('dashboard') }}">Dashboard</a>
-      <a href="{{ url_for('logout') }}">Logout</a>
-    {% else %}
-      <a href="{{ url_for('index') }}">Home</a>
-      <a href="{{ url_for('login') }}">Login</a>
-      <a href="{{ url_for('register') }}">Register</a>
-    {% endif %}
-  </nav>
-</header>
+<div id="content">
+  <header>
+    <h1>Online Classes Portal</h1>
+    <nav>
+      {% if current_user.is_authenticated %}
+        <span>Welcome, {{ current_user.username }}</span>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </nav>
+  </header>
 
-<section class="hero" role="banner" aria-label="Welcome to Online Classes Portal">
-  <div class="hero-content">
-    <h2>Learn, Practice &amp; Grow Your Skills</h2>
-    <p>Access quality tutorials and video courses from expert tutors, anytime and anywhere.</p>
-    <a href="{{ url_for('register') }}" class="btn-primary" role="button">Get Started</a>
-  </div>
-</section>
-
-<main class="container" role="main">
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul class="flashes" aria-live="polite">
-        {% for msg in messages %}
-          <li class="flash-message" tabindex="0">{{ msg }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
-
-  {% block content %}{% endblock %}
-
-  <section class="features" aria-label="Platform Features">
-    <div class="feature-card" tabindex="0">
-      <i class="fa-solid fa-chalkboard-teacher" aria-hidden="true"></i>
-      <h3>Expert Tutors</h3>
-      <p>Learn from industry professionals and experienced educators with real-world expertise.</p>
-    </div>
-    <div class="feature-card" tabindex="0">
-      <i class="fa-solid fa-video" aria-hidden="true"></i>
-      <h3>Interactive Video Courses</h3>
-      <p>High-quality video tutorials with quizzes and assignments to keep you engaged.</p>
-    </div>
-    <div class="feature-card" tabindex="0">
-      <i class="fa-solid fa-certificate" aria-hidden="true"></i>
-      <h3>Certifications</h3>
-      <p>Earn certificates to showcase your achievements and boost your career prospects.</p>
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Learn, Practice & Grow Your Skills</h2>
+      <p>Access quality tutorials and video courses from expert tutors, anytime and anywhere.</p>
+      <a href="{{ url_for('register') }}" class="btn-primary">Get Started</a>
     </div>
   </section>
-</main>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+    <section class="features">
+      <div class="feature-card">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <h3>Expert Tutors</h3>
+        <p>Learn from industry professionals and experienced educators with real-world expertise.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-video"></i>
+        <h3>Interactive Video Courses</h3>
+        <p>High-quality video tutorials with quizzes and assignments to keep you engaged.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-certificate"></i>
+        <h3>Certifications</h3>
+        <p>Earn certificates to showcase your achievements and boost your career prospects.</p>
+      </div>
+    </section>
+  </main>
+</div>
 
 <footer>
-  <div class="social-icons" aria-label="Social Media Links">
-    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+  <div class="social-icons">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
   </div>
-  <p>© 2025 Online Classes Portal | All rights reserved</p>
+  <p>© 2025 Online Classes Portal</p>
 </footer>
 
 <script>
-  // Hide flash messages after 4.5 seconds
   document.addEventListener('DOMContentLoaded', function () {
-    const flashMessages = document.querySelectorAll('.flash-message');
-    flashMessages.forEach(msg => {
-      setTimeout(() => {
-        msg.style.display = 'none';
-      }, 4500);
-    });
-
-    // Highlight active nav link
     const navLinks = document.querySelectorAll("nav a");
     navLinks.forEach(link => {
       if (link.href === window.location.href) {
